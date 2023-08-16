@@ -1,11 +1,12 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, unused_local_variable, avoid_unnecessary_containers
 
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:order_food_mobile/constants/colors.dart';
 import 'package:order_food_mobile/constants/string.dart';
+import 'package:order_food_mobile/widgets/card_category.dart';
 import 'package:order_food_mobile/widgets/card_discount.dart';
 import 'package:order_food_mobile/widgets/card_recommendation.dart';
+import 'package:order_food_mobile/widgets/header_profile.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -15,15 +16,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final List<String> imgList = [
-    'https://images.unsplash.com/photo-1520342868574-5fa3804e551c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=6ff92caffcdd63681a35134a6770ed3b&auto=format&fit=crop&w=1951&q=80',
-    'https://images.unsplash.com/photo-1522205408450-add114ad53fe?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=368f45b0888aeb0b7b08e3a1084d3ede&auto=format&fit=crop&w=1950&q=80',
-    'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=94a1e718d89ca60a6337a6008341ca50&auto=format&fit=crop&w=1950&q=80',
-    'https://images.unsplash.com/photo-1523205771623-e0faa4d2813d?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=89719a0d55dd05e2deae4120227e6efc&auto=format&fit=crop&w=1953&q=80',
-    'https://images.unsplash.com/photo-1508704019882-f9cf40e475b4?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=8c6e5e3aba713b17aa1fe71ab4f0ae5b&auto=format&fit=crop&w=1352&q=80',
-    'https://images.unsplash.com/photo-1519985176271-adb1088fa94c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=a0c8d632e977f94e5d312d9893258f59&auto=format&fit=crop&w=1355&q=80'
-  ];
-
   int _cIndex = 0;
 
   void _incrementTab(index) {
@@ -92,49 +84,19 @@ class _HomeScreenState extends State<HomeScreen> {
                 shrinkWrap: true,
                 physics: ScrollPhysics(),
                 children: [
-                  ListTile(
-                    leading: CircleAvatar(
-                      backgroundImage: AssetImage(imgProfile),
-                    ),
-                    title: Text(
-                      "Septio Dwi",
-                      style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.white),
-                    ),
-                    subtitle: Row(
-                      children: [
-                        Icon(
-                          Icons.location_on,
-                          size: 16,
-                          color: Colors.white,
-                        ),
-                        Text(
-                          "Cibatok, Kab.Bogor",
-                          style: TextStyle(
-                            fontSize: 12,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ],
-                    ),
-                    trailing: Container(
-                      // color: Colors.amber,
-                      child: Image.asset(
-                        iconNotif,
-                        width: 60,
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  ),
+                  HeaderProfile(),
                   SizedBox(height: 10),
-                  CarouselSlider(
-                    items: imgList
-                        .map((item) => Container(
-                              width: width,
+                  SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Padding(
+                      padding: EdgeInsets.only(bottom: 20 - 10),
+                      child: Row(
+                        children: [
+                          for (int i = 0; i < 4; i++)
+                            Container(
+                              width: width - 40,
                               height: 150,
-                              // margin: EdgeInsets.symmetric(horizontal: 20),
+                              margin: EdgeInsets.symmetric(horizontal: 20),
                               decoration: BoxDecoration(
                                 // color: Colors.amber,
                                 borderRadius: BorderRadius.circular(16),
@@ -142,28 +104,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                     image: AssetImage(imgSlider),
                                     fit: BoxFit.cover),
                               ),
-                            ))
-                        .toList(),
-                    options: CarouselOptions(
-                        height: 150,
-                        aspectRatio: 9 / 16,
-                        viewportFraction: 0.8,
-                        initialPage: 0,
-                        enableInfiniteScroll: true,
-                        scrollDirection: Axis.horizontal,
-                        reverse: false,
-                        // autoPlay: true,
-                        autoPlayInterval: Duration(seconds: 3),
-                        autoPlayAnimationDuration: Duration(milliseconds: 800),
-                        autoPlayCurve: Curves.fastOutSlowIn,
-                        enlargeCenterPage: true,
-                        enlargeFactor: 0.3,
-                        onPageChanged: (index, reason) {
-                          int current = 0;
-                          setState(() {
-                            current = index;
-                          });
-                        }),
+                            ),
+                        ],
+                      ),
+                    ),
                   ),
                   SizedBox(height: 20),
                   Padding(
@@ -183,102 +127,10 @@ class _HomeScreenState extends State<HomeScreen> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         // for (int i = 0; i < 4; i++)
-                        Column(
-                          children: [
-                            Container(
-                              height: 65,
-                              width: 65,
-                              padding: EdgeInsets.all(15),
-                              decoration: BoxDecoration(
-                                color: Color(0xff553100),
-                                shape: BoxShape.circle,
-                              ),
-                              child: Image.asset(
-                                iconFood,
-                                height: 26,
-                              ),
-                            ),
-                            SizedBox(height: 4),
-                            Text(
-                              "Panganan",
-                              style: TextStyle(
-                                fontSize: 11,
-                              ),
-                            ),
-                          ],
-                        ),
-                        Column(
-                          children: [
-                            Container(
-                              height: 65,
-                              width: 65,
-                              padding: EdgeInsets.all(15),
-                              decoration: BoxDecoration(
-                                color: Color(0xff553100),
-                                shape: BoxShape.circle,
-                              ),
-                              child: Image.asset(
-                                iconDrink,
-                                height: 26,
-                              ),
-                            ),
-                            SizedBox(height: 4),
-                            Text(
-                              "Ngombe",
-                              style: TextStyle(
-                                fontSize: 11,
-                              ),
-                            ),
-                          ],
-                        ),
-                        Column(
-                          children: [
-                            Container(
-                              height: 65,
-                              width: 65,
-                              padding: EdgeInsets.all(15),
-                              decoration: BoxDecoration(
-                                color: Color(0xff553100),
-                                shape: BoxShape.circle,
-                              ),
-                              child: Image.asset(
-                                iconJajan,
-                                height: 26,
-                              ),
-                            ),
-                            SizedBox(height: 4),
-                            Text(
-                              "Jajanan",
-                              style: TextStyle(
-                                fontSize: 11,
-                              ),
-                            ),
-                          ],
-                        ),
-                        Column(
-                          children: [
-                            Container(
-                              height: 65,
-                              width: 65,
-                              padding: EdgeInsets.all(15),
-                              decoration: BoxDecoration(
-                                color: Color(0xff553100),
-                                shape: BoxShape.circle,
-                              ),
-                              child: Image.asset(
-                                iconMore,
-                                height: 26,
-                              ),
-                            ),
-                            SizedBox(height: 4),
-                            Text(
-                              "Kabeh",
-                              style: TextStyle(
-                                fontSize: 11,
-                              ),
-                            ),
-                          ],
-                        ),
+                        CardCategory(imageUrl: iconFood, title: "Panganan"),
+                        CardCategory(imageUrl: iconDrink, title: "Ngombe"),
+                        CardCategory(imageUrl: iconJajan, title: "Jajanan"),
+                        CardCategory(imageUrl: iconMore, title: "Kabeh"),
                       ],
                     ),
                   ),
