@@ -2,7 +2,7 @@
 
 A new Flutter project.
 
-![Image](food_app_mobile/assets/images/ss-preview.png)
+![Image](assets/images/ss-preview.png)
 
 ## Getting Started
 
