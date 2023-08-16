@@ -2,7 +2,7 @@
 
 A new Flutter project.
 
-![Image](assets/images/ss-preview.png)
+![alt text](https://github.com/fajar65/food_app_mobile/blob/main/assets/images/ss-preview.png?raw=true)
 
 ## Getting Started
 
