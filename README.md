@@ -2,6 +2,8 @@
 
 A new Flutter project.
 
+![Image](food_app_mobile/assets/images/ss-preview.png)
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.
